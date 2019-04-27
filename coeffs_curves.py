@@ -11,9 +11,6 @@ with_load = True
 CL_alpha = {}
 CD_alpha = {}
 CM_alpha = {}
-CL_alpha_Bancada = {}
-CD_alpha_Bancada = {}
-CM_alpha_Bancada = {}
 
 for velocity in velocities:
     for incidency in incidencies:
@@ -24,11 +21,11 @@ for velocity in velocities:
             CD_alpha[incidency] = CD
             CM_alpha[incidency] = CM
         else:
-            filename = "2. {} kmh - {} graus - Sem Asa.txt".format(velocity, incidency)
+            filename = "1. {} kmh - {} graus - Sem Asa.txt".format(velocity, incidency)
             CL, CD, CM = get_Coeffs(folderpath, filename)
-            CL_alpha_Bancada[incidency] = CL
-            CD_alpha_Bancada[incidency] = CD
-            CM_alpha_Bancada[incidency] = CM
+            CL_alpha[incidency] = CL
+            CD_alpha[incidency] = CD
+            CM_alpha[incidency] = CM
 
 CL_alpha_df = pd.DataFrame.from_dict(CL_alpha, orient='index', columns=['CL'])
 CD_alpha_df = pd.DataFrame.from_dict(CD_alpha, orient='index', columns=['CD'])
@@ -38,8 +35,16 @@ print(CL_alpha_df)
 print(CD_alpha_df)
 print(CM_alpha_df)
 
-plt.plot(CL_alpha_df)
-plt.plot(CD_alpha_df)
-plt.plot(CM_alpha_df)
+
+fig1, ax1 = plt.subplots()
+plt.plot(CL_alpha_df, label='CL')
+plt.legend()
+plt.grid()
+
+fig2, ax2 = plt.subplots()
+plt.plot(CD_alpha_df, label='CD')
+plt.plot(CM_alpha_df, label='CM')
+plt.legend()
+plt.grid()
 
 plt.show()

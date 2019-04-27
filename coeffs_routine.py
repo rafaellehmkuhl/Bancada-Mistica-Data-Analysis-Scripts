@@ -6,10 +6,11 @@ def get_Coeffs(folderpath, filename):
 
     # Read file
     filepath = "Logs/{}/{}".format(folderpath, filename)
-    df_raw = pd.read_csv(filepath, sep='.', delimiter='\t', na_values=['NaN', 'OutOfRange'], skiprows=(0,1,2,3,4,5,7))
+    df_raw = pd.read_csv(filepath, sep='.', delimiter='\t', na_values=['NaN', 'OutOfRange'], skiprows=[0,1,2,3,4,5,7])
 
     # Create a copy of the original dataframe
     df = df_raw
+    print(df.head())
 
     # Create zeroed time and set as index
     df['Tempo zerado'] = df['Tempo'] - df['Tempo'][0]
